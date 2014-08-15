@@ -44,7 +44,6 @@
     <orderEntry type="library" name="SBT: com.twitter:finagle-thrift_2.10:6.20.0" level="project" />
     <orderEntry type="library" name="SBT: com.twitter:finagle-zipkin_2.10:6.6.2" level="project" />
     <orderEntry type="library" name="SBT: com.twitter:jsr166e:1.0.0" level="project" />
-    <orderEntry type="library" name="SBT: com.twitter:ostrich_2.10:9.1.0" level="project" />
     <orderEntry type="library" name="SBT: com.twitter:scala-json_2.10:3.0.1" level="project" />
     <orderEntry type="library" name="SBT: com.twitter:scrooge-core_2.10:3.16.3" level="project" />
     <orderEntry type="library" name="SBT: com.twitter:scrooge-runtime_2.10:3.1.5" level="project" />
