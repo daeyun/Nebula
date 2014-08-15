@@ -39,7 +39,7 @@ class NebulaServiceSpecBase extends FlatSpec {
     )
 
     server = ServerBuilder()
-      .bindTo(new InetSocketAddress("127.0.0.1", ThriftPort))
+      .bindTo(new InetSocketAddress(ThriftPort))
       .codec(ThriftServerFramedCodec())
       .name(ThriftServiceName)
       .build(service)
