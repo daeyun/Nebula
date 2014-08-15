@@ -3,6 +3,7 @@ package com.daeyunshin.nebula.utils;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
+import java.util.Random;
 
 /**
  * Finds an available port on localhost.
@@ -11,7 +12,8 @@ import java.net.ServerSocket;
 public class PortFinder {
 
     // the ports below 1024 are system ports
-    private static final int MIN_PORT_NUMBER = 11024;
+    private static final int MIN_PORT_NUMBER = 1024;
+    private static final int RANDOM_OFFSET_RANGE = 30000;
 
     // the ports above 49151 are dynamic and/or private
     private static final int MAX_PORT_NUMBER = 49151;
@@ -24,7 +26,7 @@ public class PortFinder {
      * @throw RuntimeException if a port could not be found
      */
     public static int findFreePort() {
-        for (int i = MIN_PORT_NUMBER; i <= MAX_PORT_NUMBER; i++) {
+        for (int i = MIN_PORT_NUMBER + new Random().nextInt(RANDOM_OFFSET_RANGE); i <= MAX_PORT_NUMBER; i++) {
             if (available(i)) {
                 return i;
             }

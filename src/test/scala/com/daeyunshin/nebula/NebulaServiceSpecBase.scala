@@ -51,9 +51,12 @@ class NebulaServiceSpecBase extends FlatSpec {
             .codec(ThriftServerFramedCodec())
             .name(ThriftServiceName)
             .build(service)
+
+          info("Successfully started a thrift server at %s" format server.localAddress.toString())
           break
         } catch {
           case e: Exception =>
+            alert("Address %s is not available. Retrying.." format server.localAddress.toString())
             e.printStackTrace()
         }
       }
@@ -64,7 +67,7 @@ class NebulaServiceSpecBase extends FlatSpec {
     try {
       server.close()
     } catch {
-      case _ =>
+      case _: Exception =>
     }
   }
 
