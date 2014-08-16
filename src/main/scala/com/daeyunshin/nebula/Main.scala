@@ -31,7 +31,7 @@ object Main extends TwitterServer {
       graphPath(),
       graphFilePrefix(),
       Executors.newFixedThreadPool(GraphReaderThreadCount)
-    ).toArrayBasedDirectedGraph()
+    ).toSharedArrayBasedDirectedGraph()
 
     val graphOperation = new DirectedGraphOperation(graph)
 

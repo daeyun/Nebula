@@ -31,7 +31,7 @@ class NebulaServiceSpecBase extends FlatSpec {
       SampleGraphPath,
       SampleGraphFilePrefix,
       Executors.newFixedThreadPool(1)
-    ).toArrayBasedDirectedGraph()
+    ).toSharedArrayBasedDirectedGraph()
 
     val graphOperation = new DirectedGraphOperation(graph)
 
@@ -71,7 +71,7 @@ class NebulaServiceSpecBase extends FlatSpec {
     }
   }
 
-  def getThriftClient() = {
+  def client = {
     Thrift.newIface[NebulaService.FutureIface]("localhost:%d" format port)
   }
 }
