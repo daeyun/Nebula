@@ -15,7 +15,9 @@ class NebulaServiceImpl(graphOperation: DirectedGraphOperation) extends NebulaSe
     Future.value(graphOperation.getEdgeCount())
   }
 
-  override def getShortestPath(sourceNodeId: Int, destinationNodeId: Int): Future[Seq[Int]] = ???
+  override def getShortestPath(sourceNodeId: Int, destinationNodeId: Int): Future[Seq[Int]] = {
+    Future.value(graphOperation.unweightedShortestPath(sourceNodeId, destinationNodeId))
+  }
 
   override def getOutBoundNeighbors(sourceNodeId: Int, depth: Int): Future[Seq[Seq[Int]]] = {
     Future.value(graphOperation.getOutBoundNeighbors(sourceNodeId, depth))

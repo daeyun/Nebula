@@ -25,6 +25,14 @@ class NebulaServiceSpec extends NebulaServiceSpecBase with GivenWhenThen with Be
     }
   }
 
+  "unweighted shortest path" should "work" in {
+    Given("trivial test cases")
+    assert(Await.result(client.getShortestPath(1, 2)).equals(Seq(1, 2)))
+    assert(Await.result(client.getShortestPath(1, 3)).equals(Seq(1, 2, 3)))
+    assert(Await.result(client.getShortestPath(6, 1)).equals(Seq(6, 7, 1)))
+    assert(Await.result(client.getShortestPath(6, 0)).equals(Seq()))
+  }
+
   override def beforeAll() = {
     startThriftServer()
   }

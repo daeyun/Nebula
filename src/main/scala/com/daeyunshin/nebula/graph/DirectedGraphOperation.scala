@@ -20,6 +20,33 @@ class DirectedGraphOperation(graph: DirectedGraph) {
     }
   }
 
+  def unweightedShortestPath(sourceNodeId: Int, destNodeId: Int): Seq[Int] = {
+    val queue = new mutable.Queue[Int]
+    val parentMap = new mutable.HashMap[Int, Int]
+    queue += sourceNodeId
+    parentMap += (sourceNodeId -> -1)
+
+    while (queue.nonEmpty) {
+      val nodeId = queue.dequeue()
+
+      if (nodeId == destNodeId) {
+        val path = new ListBuffer[Int]
+        var currNode = nodeId
+        while (currNode != -1) {
+          path += currNode
+          currNode = parentMap.get(currNode).get
+        }
+        return path.reverse
+      }
+
+      val childrenIds = graph.getNodeById(nodeId).get.outboundNodes().filter { id => !parentMap.contains(id)}
+      childrenIds.foreach { id => parentMap += (id -> nodeId) }
+      queue ++= childrenIds
+    }
+
+    Seq[Int]()
+  }
+
   def getOutBoundNeighbors(nodeId: Int, depth: Int) = {
     val levelNodeIds = ArrayBuffer[Seq[Int]](List(nodeId))
     levelNodeIds.sizeHint(depth)
@@ -42,4 +69,5 @@ class DirectedGraphOperation(graph: DirectedGraph) {
 
     levelNodeIds
   }
+
 }
