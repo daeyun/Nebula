@@ -30,13 +30,10 @@ class DirectedGraphOperation(graph: DirectedGraph) {
       val nodeId = queue.dequeue()
 
       if (nodeId == destNodeId) {
-        val path = new ListBuffer[Int]
+        val path = new mutable.Stack[Int]
         var currNode = nodeId
-        while (currNode != -1) {
-          path += currNode
-          currNode = parentMap.get(currNode).get
-        }
-        return path.reverse
+        while (currNode != -1) { path.push(currNode); currNode = parentMap.get(currNode).get }
+        return path
       }
 
       val childrenIds = graph.getNodeById(nodeId).get.outboundNodes().filter { id => !parentMap.contains(id)}
